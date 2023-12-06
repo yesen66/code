@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* 弹窗样式 */
+        .modal {
+            display: none;
+            /* 默认隐藏 */
+            position: fixed;
+            /* 固定在屏幕上 */
+            z-index: 1;
+            /* 处于其他元素之上 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            /* 允许滚动 */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* 半透明背景 */
+        }
+
+        /* 弹窗内容样式 */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            /* 在屏幕上垂直居中 */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* 关闭按钮样式 */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 触发弹窗的按钮 -->
+    <button onclick="openModal()">打开弹窗</button>
+
+    <!-- 弹窗内容 -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>这是一个弹窗</h2>
+            <p>弹窗的内容可以在这里添加。</p>
+        </div>
+    </div>
+
+    <script>
+        // 获取弹窗元素
+        var modal = document.getElementById("myModal");
+
+        // 打开弹窗
+        function openModal() {
+            modal.style.display = "block";
+            // 添加点击事件监听器，捕获点击事件
+            window.addEventListener("click", outsideClick);
+        }
+
+        // 关闭弹窗
+        function closeModal() {
+            modal.style.display = "none";
+            // 移除点击事件监听器
+            window.removeEventListener("click", outsideClick);
+        }
+
+        // 处理点击事件
+        function outsideClick(event) {
+            // 检查点击的位置是否在弹窗外部
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+
+</html>
