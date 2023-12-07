@@ -1,92 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <style>
-        /* 弹窗样式 */
-        .modal {
+        .tabcontent {
             display: none;
-            /* 默认隐藏 */
-            position: fixed;
-            /* 固定在屏幕上 */
-            z-index: 1;
-            /* 处于其他元素之上 */
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            /* 允许滚动 */
-            background-color: rgba(0, 0, 0, 0.4);
-            /* 半透明背景 */
         }
 
-        /* 弹窗内容样式 */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            /* 在屏幕上垂直居中 */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
+        .tablinks {
+            background-color: #ccc;
+            padding: 8px 16px;
+            border: none;
         }
 
-        /* 关闭按钮样式 */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+        .tablinks:hover {
+            background-color: #aaa;
         }
 
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
+        .tablinks.active {
+            background-color: #fff;
         }
     </style>
 </head>
 
 <body>
-    <!-- 触发弹窗的按钮 -->
-    <button onclick="openModal()">打开弹窗</button>
-
-    <!-- 弹窗内容 -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>这是一个弹窗</h2>
-            <p>弹窗的内容可以在这里添加。</p>
-        </div>
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'tab1')">标签页1</button>
+        <button class="tablinks" onclick="openTab(event, 'tab2')">标签页2</button>
+        <button class="tablinks" onclick="openTab(event, 'tab3')">标签页3</button>
     </div>
 
-    <script>
-        // 获取弹窗元素
-        var modal = document.getElementById("myModal");
+    <div id="tab1" class="tabcontent">
+        <h3>标签页1的内容</h3>
+        <p>这是标签页1的内容。</p>
+    </div>
 
-        // 打开弹窗
-        function openModal() {
-            modal.style.display = "block";
-            // 添加点击事件监听器，捕获点击事件
-            window.addEventListener("click", outsideClick);
-        }
+    <div id="tab2" class="tabcontent">
+        <h3>标签页2的内容</h3>
+        <p>这是标签页2的内容。</p>
+    </div>
 
-        // 关闭弹窗
-        function closeModal() {
-            modal.style.display = "none";
-            // 移除点击事件监听器
-            window.removeEventListener("click", outsideClick);
-        }
-
-        // 处理点击事件
-        function outsideClick(event) {
-            // 检查点击的位置是否在弹窗外部
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-    </script>
+    <div id="tab3" class="tabcontent">
+        <h3>标签页3的内容</h3>
+        <p>这是标签页3的内容。</p>
+    </div>
 </body>
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+
+        // 隐藏所有内容区域
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // 移除所有标签页的活动状态
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // 显示所选标签页的内容，并设置活动状态
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
 
 </html>
