@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tab-container {
+            width: 100%;
+        }
+
+        .tab {
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .tab-button {
+            background-color: #f2f2f2;
+            border: none;
+            color: black;
+            padding: 10px 20px;
+            cursor: pointer;
+            float: left;
+        }
+
+        .tab-button.active {
+            background-color: #ddd;
+        }
+
+        .tab-button:hover {
+            background-color: #ddd;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .tab-content h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tab-container">
+        <div class="tab">
+            <button class="tab-button active" onclick="openTab(event, 'tab1')">标签页1</button>
+            <button class="tab-button" onclick="openTab(event, 'tab2')">标签页2</button>
+            <button class="tab-button" onclick="openTab(event, 'tab3')">标签页3</button>
+        </div>
+
+        <div id="tab1" class="tab-content" style="display: block;">
+            <h3>标签页1的内容</h3>
+            <p>这是标签页1的内容。</p>
+        </div>
+
+        <div id="tab2" class="tab-content">
+            <h3>标签页2的内容</h3>
+            <p>这是标签页2的内容。</p>
+        </div>
+
+        <div id="tab3" class="tab-content">
+            <h3>标签页3的内容</h3>
+            <p>这是标签页3的内容。</p>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabContent, tabButton;
+
+            // 获取所有标签页内容和标签按钮元素
+            tabContent = document.getElementsByClassName("tab-content");
+            tabButton = document.getElementsByClassName("tab-button");
+
+            // 隐藏所有标签页内容
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+
+            // 移除所有标签按钮的活动类
+            for (i = 0; i < tabButton.length; i++) {
+                tabButton[i].className = tabButton[i].className.replace(" active", "");
+            }
+
+            // 显示当前标签页内容
+            document.getElementById(tabName).style.display = "block";
+
+            // 添加活动类到当前标签按钮
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+
+</html>
