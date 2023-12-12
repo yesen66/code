@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>接口数据分页展示</title>
+</head>
+
+<body>
+    <ul id="list"></ul>
+    <div id="pagination"></div>
+
+    <script>
+        // 模拟接口响应的假数据
+        const fakeData = [
+            { id: 1, name: 'Item 1' },
+            { id: 2, name: 'Item 2' },
+            { id: 3, name: 'Item 3' },
+            { id: 4, name: 'Item 4' },
+            { id: 5, name: 'Item 5' },
+            { id: 50, name: 'Item 50' }
+        ];
+
+        const listElement = document.getElementById('list');
+        const paginationElement = document.getElementById('pagination');
+
+        const itemsPerPage = 5; // 每页显示的数据条数
+        let currentPage = 1; // 当前页码
+
+        // 根据当前页码和每页显示的数据条数计算起始索引和结束索引
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        // 根据起始索引和结束索引获取当前页的数据
+        const currentPageData = fakeData.slice(startIndex, endIndex);
+
+        // 循环遍历当前页的数据，创建列表项并添加到列表中
+        currentPageData.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.textContent = item.name;
+            listElement.appendChild(listItem);
+        });
+
+        // 计算总页数
+        const totalPages = Math.ceil(fakeData.length / itemsPerPage);
+
+        // 创建分页按钮
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.textContent = i;
+            pageButton.addEventListener('click', () => {
+                currentPage = i;
+                listElement.innerHTML = ''; // 清空列表
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const currentPageData = fakeData.slice(startIndex, endIndex);
+                currentPageData.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = item.name;
+                    listElement.appendChild(listItem);
+                });
+            });
+            paginationElement.appendChild(pageButton);
+        }
+    </script>
+</body>
+
+</html>
