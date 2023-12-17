@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .slide {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel">
+        <video class="slide active" controls>
+            <source src="video.mp4" type="video/mp4">
+        </video>
+
+        <img class="slide" src="image1.jpg" alt="Image 1">
+
+        <img class="slide" src="image2.jpg" alt="Image 2">
+
+        <button onclick="previousSlide()">Previous</button>
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        var currentSlide = 0;
+        var slides = document.getElementsByClassName('slide');
+
+        function showSlide(index) {
+            if (index >= slides.length) {
+                index = 0;
+            } else if (index < 0) {
+                index = slides.length - 1;
+            }
+
+            for (var i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+
+            slides[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+    </script>
+</body>
+
+</html>
